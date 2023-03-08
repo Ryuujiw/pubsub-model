@@ -1,7 +1,7 @@
 ﻿namespace Abc.Accounting
 {
-    public class AccountData
+    public static class AccountData
     {
-        public List<Order> Orders { get; set; }
+        public static List<Order> Orders { get; set; } = new List<Order>();
     }
 }

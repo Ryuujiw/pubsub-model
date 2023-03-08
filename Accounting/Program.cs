@@ -23,9 +23,10 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/order", async (IConsumerService consumerService) =>
+app.MapGet("/orders/get-latest", async (IConsumerService consumerService) =>
 {
-    return new Order(Guid.NewGuid(), string.Empty);
+    var latest = AccountData.Orders.LastOrDefault();
+    return latest;
 })
 .WithName("get-latest");
 

@@ -23,12 +23,11 @@ namespace Abc.Accounting
         public async Task ReadMessages()
         {
             var consumer = new AsyncEventingBasicConsumer(_model);
-            var textReceived = string.Empty;
             consumer.Received += async (ch, ea) =>
             {
                 var body = ea.Body.ToArray();
                 var text = System.Text.Encoding.UTF8.GetString(body);
-                textReceived = text;
+                AccountData.Orders.Add(new Order(Guid.NewGuid(), text));
                 await Task.CompletedTask;
                 _model.BasicAck(ea.DeliveryTag, false);
             };
