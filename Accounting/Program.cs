@@ -29,6 +29,7 @@ app.UseHttpsRedirection();
 app.MapGet("/orders/get-latest", async (IConsumerService consumerService) =>
 {
     var latest = AccountData.Orders.LastOrDefault();
+    Console.WriteLine(latest?.remarks);
     return latest;
 })
 .WithName("get-latest");

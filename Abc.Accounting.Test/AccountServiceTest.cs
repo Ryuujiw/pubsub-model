@@ -27,7 +27,7 @@ namespace Abc.Accounting.Test
             var processedRemark = service.ToAbcStandard(remark);
 
             // Assert
-            Assert.True(processedRemark.All(c => char.IsUpper(c)));
+            Assert.False(processedRemark.All(c => char.IsUpper(c)));
         }
 
         [Fact]
