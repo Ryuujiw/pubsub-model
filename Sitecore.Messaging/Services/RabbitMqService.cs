@@ -18,7 +18,8 @@ namespace Sitecore.Messaging.Services
             {
                 UserName = _rabbitMqConfig.Username,
                 Password = _rabbitMqConfig.Password,
-                HostName = _rabbitMqConfig.Hostname
+                HostName = _rabbitMqConfig.Hostname,
+                Port = _rabbitMqConfig.Port
             };
             connection.DispatchConsumersAsync = true;
             var channel = connection.CreateConnection();
