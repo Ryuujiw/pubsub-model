@@ -34,3 +34,5 @@ Response:
 ```
 {"orderId":"b0770dd4-fa49-444b-9e39-9fa40685cdac","remarks":"somedata"}
 ```
+
+[![.NET](https://github.com/Ryuujiw/pubsub-model/actions/workflows/dotnet.yml/badge.svg)](https://github.com/Ryuujiw/pubsub-model/actions/workflows/dotnet.yml)
