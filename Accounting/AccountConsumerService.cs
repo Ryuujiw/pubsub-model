@@ -1,4 +1,5 @@
-﻿using RabbitMQ.Client;
+﻿using Abc.Accounting.Services;
+using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using Sitecore.Messaging.Services;
 
@@ -8,9 +9,11 @@ namespace Abc.Accounting
     {
         private readonly IModel _model;
         private readonly IConnection _connection;
+        private readonly IAccountService _accountService;
 
-        public AccountConsumerService(IRabbitMqService rabbitMqService)
+        public AccountConsumerService(IRabbitMqService rabbitMqService, IAccountService accountService)
         {
+            _accountService = accountService;
             _connection = rabbitMqService.CreateChannel();
             _model = _connection.CreateModel();
             _model.QueueDeclare(_queueName, durable: true, exclusive: false, autoDelete: false);
@@ -27,7 +30,7 @@ namespace Abc.Accounting
             {
                 var body = ea.Body.ToArray();
                 var text = System.Text.Encoding.UTF8.GetString(body);
-                AccountData.Orders.Add(new Order(Guid.NewGuid(), text));
+                AccountData.Orders.Add(new Order(Guid.NewGuid(), _accountService.ToAbcStandard(text)));
                 await Task.CompletedTask;
                 _model.BasicAck(ea.DeliveryTag, false);
             };
