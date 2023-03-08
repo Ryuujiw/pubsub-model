@@ -1,4 +1,5 @@
 using Abc.Accounting;
+using Abc.Accounting.Services;
 using Sitecore.Messaging;
 using Sitecore.Messaging.Services;
 
@@ -10,6 +11,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddMessagingService(builder.Configuration);
 builder.Services.AddSingleton<IConsumerService, AccountConsumerService>();
+builder.Services.AddSingleton<IAccountService, AccountService>();
+builder.Services.AddSingleton<IStandardsService, StandardsService>();
 builder.Services.AddHostedService<ConsumerHostedService>();
 
 var app = builder.Build();
